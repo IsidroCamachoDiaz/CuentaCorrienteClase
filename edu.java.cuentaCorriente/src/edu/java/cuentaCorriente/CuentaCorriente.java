@@ -83,6 +83,7 @@ public class CuentaCorriente {
 		System.out.println("Introduza el nombre completo del titular: ");
 		opcionEntradaNombreTitular = entradaNombreTitular.next();
 		
+
 		//Opción 1, constructor vacío
 		CuentaCorriente cccVacio = new CuentaCorriente();
 		cccVacio.setDni(opcionEntradaDni);
@@ -102,18 +103,9 @@ public class CuentaCorriente {
 		System.out.println("Indique dni de cuenta: ");
 		String opcionEntradaDni = entradaDni.next();
 		//buscar la cuenta
-		int contador = 0;
-		boolean esEncontrado = false;
-		for(CuentaCorriente cuenta: bd) {			
-			String dniBd = cuenta.getDni();
-			if(dniBd.equals(opcionEntradaDni)) {
-				esEncontrado = true;
-				break;
-			}
-			contador++;			
-		}		
+		int contador =EncuentraCuenta(bd,opcionEntradaDni);
 
-		if(esEncontrado) {
+		if(contador!=bd.size()) {
 			System.out.println("Indique saldo a ingresar: ");
 			Scanner entradaIngreso = new Scanner(System.in);
 			double ingreso = entradaIngreso.nextDouble();
@@ -128,8 +120,22 @@ public class CuentaCorriente {
 		return bd;
 	}
 	
-	public ArrayList<CuentaCorriente> mostrarCuentasUsuario(String dniUsuario){
-		return null;		
+	public void mostrarCuentasUsuario(List<CuentaCorriente> bd){
+		Scanner entradaDni = new Scanner(System.in);
+		System.out.println("Indique dni de cuenta: ");
+		String opcionEntradaDni = entradaDni.next();
+	}
+	
+	
+	public int EncuentraCuenta(List<CuentaCorriente> bd,String opcionEntradaDni) {
+		int contador = 0;
+		for(CuentaCorriente cuenta: bd) {			
+			String dniBd = cuenta.getDni();
+			if(dniBd.equals(opcionEntradaDni)) 
+				break;
+			contador++;			
+		}	
+		return contador;
 	}
 	
 	
