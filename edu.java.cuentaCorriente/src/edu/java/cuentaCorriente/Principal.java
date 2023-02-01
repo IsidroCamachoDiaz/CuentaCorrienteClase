@@ -39,8 +39,10 @@ public class Principal {
 					listaCcc = ccc.ingresoCuenta(listaCcc);
 					break;
 				case 3:
+					ccc.sacarDinero(listaCcc);
 					break;
 				case 4:
+					ccc.mostrarCuentasUsuario(listaCcc);
 					break;
 				case 5:
 					cerrarMenu = true;

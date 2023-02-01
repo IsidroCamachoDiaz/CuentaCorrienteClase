@@ -113,8 +113,9 @@ public class CuentaCorriente {
 			bd.get(contador).setSaldo(saldoActual+ingreso);
 			double saldoNuevo = saldoActual+ingreso;
 			System.out.println("Saldo anterior: "+saldoActual+"Saldo nuevo: "+ingreso);
-		}else {
-			System.out.println("No existe cuenta para el dni indicaco: "+opcionEntradaDni);
+		}
+		else {
+			System.out.println("No existe cuenta para el dni indicado: "+opcionEntradaDni);
 			return bd;
 		}
 		return bd;
@@ -124,8 +125,40 @@ public class CuentaCorriente {
 		Scanner entradaDni = new Scanner(System.in);
 		System.out.println("Indique dni de cuenta: ");
 		String opcionEntradaDni = entradaDni.next();
+		int index=EncuentraCuenta(bd,opcionEntradaDni);
+		
+		if(index!=bd.size()) {
+		System.out.println("Bienvenido: "+bd.get(index).nombreTitular);
+		System.out.println("DNI: "+bd.get(index).dni);
+		System.out.println("Saldo actual: "+bd.get(index).saldo);
+		}
+		else 
+			System.out.println("No existe cuenta para el dni indicado: "+opcionEntradaDni);
 	}
 	
+	public List <CuentaCorriente> sacarDinero(List <CuentaCorriente> bd){
+		Scanner entradaDni = new Scanner(System.in);
+		System.out.println("Indique dni de cuenta: ");
+		String opcionEntradaDni = entradaDni.next();
+		int index=EncuentraCuenta(bd,opcionEntradaDni);
+		if(index!=bd.size()) 
+			{
+			Scanner leer = new Scanner(System.in);
+			System.out.println("INTRODUZCA LA CANTIDAD A SACAR ");
+			double cantidadRetirar= leer.nextDouble();
+			if((bd.get(index).saldo-cantidadRetirar)<0) {
+				System.out.println("Saldo insuficiente en la cuenta ");
+				return bd;
+			}
+			else {
+				bd.get(index).saldo=bd.get(index).saldo-cantidadRetirar;
+				System.out.println("En la cuenta queda: "+bd.get(index).saldo);
+				}
+			}
+		else 
+			System.out.println("No existe cuenta para el dni indicado: "+opcionEntradaDni);
+		return bd;
+	}
 	
 	public int EncuentraCuenta(List<CuentaCorriente> bd,String opcionEntradaDni) {
 		int contador = 0;
